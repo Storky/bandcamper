@@ -25,12 +25,12 @@ const Footer = ({ customClass, history }) => {
 
     let footerNavItemsArray = [
         {
-            link: '/dream-table',
-            label: 'Dream Table',
-        },
-        {
             link: '/nosql-table',
             label: 'NoSQL Table',
+        },
+        {
+            link: '/mechs',
+            label: 'Mechs',
         },
         {
             link: '/uikit',

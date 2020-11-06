@@ -21,6 +21,7 @@ import { makeStyles, fade } from "@material-ui/core";
 import {connect} from "react-redux";
 import * as actions from 'store/actions/';
 import MainMenu from "components/MainMenu/MainMenu";
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -86,11 +87,14 @@ const useStyles = makeStyles((theme) => {
     }
 });
 
-const Header = ({ customClass, onLogout }) => {
+const Header = ({ customClass, onLogout, onTest }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const [mainMenuOpened, toggleMainMenu] = useState(false);
+
+    const idToken = useSelector(state => state.auth.idToken)
+
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -112,6 +116,10 @@ const Header = ({ customClass, onLogout }) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
+    const handleTestClick = event => {
+        onTest(idToken);
+    };
+
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
         <Menu
@@ -125,6 +133,7 @@ const Header = ({ customClass, onLogout }) => {
         >
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleTestClick}>test</MenuItem>
             <MenuItem onClick={onLogout}>Log Out</MenuItem>
         </Menu>
     );
@@ -255,10 +264,16 @@ Header.defaultTypes = {
     customClass: '',
 };
 
+// const mapStateToProps = state =>({
+//     idToken: state.auth.idToken,
+// });
+
 const mapDispatchToProps = dispatch => {
     return {
         onLogout: () => dispatch(actions.logout()),
+        onTest: (idToken) => dispatch(actions.test(idToken)),
     };
 };
 
 export default connect(null, mapDispatchToProps)(Header);
+// export default connect(mapStateToProps, mapDispatchToProps)(Header);

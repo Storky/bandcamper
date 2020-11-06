@@ -14,6 +14,8 @@ import UIExampleModal from "containers/UIKit/UIExampleModal";
 import UiCheckboxes from "containers/UIKit/UICheckboxes";
 import UIInputs from "containers/UIKit/UIInputs";
 import UITypo from "containers/UIKit/UITypo";
+import Container from "@material-ui/core/Container";
+import {makeStyles} from "@material-ui/core/styles";
 
 const tabsDataArray = [
     {
@@ -137,9 +139,20 @@ const tabsDataArray = [
     },
 ];
 
+const useStyles = makeStyles(() => ({
+    pageContainer: {
+        alignSelf: 'flex-start',
+        paddingBottom: 70,
+    },
+}));
+
 const UIKitPage = () => {
+    const classes = useStyles();
+
     return (
-        <TabsEngine tabsDataArray={tabsDataArray}/>
+        <Container maxWidth='lg' className={classes.pageContainer}>
+            <TabsEngine tabsDataArray={tabsDataArray}/>
+        </Container>
     );
 };
 

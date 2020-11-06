@@ -10,6 +10,7 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        paddingBottom: 64,
     },
     layoutHeader: null,
     layoutMain: null,
